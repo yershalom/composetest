@@ -4,11 +4,15 @@ services:
     build: app1
     ports:
       - "5000:5000"
+    depends_on:
+      - redis
   web2:
     build: app2
     ports:
       - "5001:5001"
     links:
       - "web1:app1.app1.svc.cluster.local"
+    depends_on:
+      - web1
   redis:
     image: "redis:alpine"
